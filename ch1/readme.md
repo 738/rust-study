@@ -84,3 +84,48 @@ edition = "2018"
 * TOML(Tom’s Obvious, Minimal Language) 포맷은 카고의 설정 포맷이다.
 * `[package]` 밑 부분은 패키지를 설정하는 부분이다.
 * `[dependencies]` 밑 부분은 해당 패키지의 종속성 리스트이다.
+
+## `cargo`로 프로젝트 빌드 및 실행하기
+
+### 빌드하기
+
+```bash
+$ cargo build
+   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 6.91s
+```
+
+* 빌드를 하면 `target/debug/hello_cargo` 실행 파일이 생성된다.
+* 최초에 빌드할 때, `Cargo.lock` 파일이 생성되는데 프로젝트의 정확한 버전의 종속성을 유지할 수 있게 해준다. (`npm`의 `package-lock.json` 같은 느낌인듯)
+
+### 실행하기
+
+```bash
+$ ./target/debug/hello_cargo
+Hello, world!
+```
+
+```bash
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/hello_cargo`
+Hello, world!
+```
+
+### 체크하기
+
+```bash
+$ cargo check
+   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
+```
+
+* `cargo`는 체크하는 명령어를 제공한다. `cargo check`는 해당 프로젝트가 컴파일이 되는지 체크해주는데 `cargo build`와 다른 점은 실행 가능한 바이너리 파일이 생성되지 않는 것이다. 그럼에도 불구하고 사용하는 이유는 빠르기 때문이다. 많은 Rustacean들이 주기적으로 프로그램이 잘 컴파일되는지 확인하기 위해 `cargo check`를 사용한다.
+
+### 릴리즈 빌드하기
+
+```bash
+$ cargo build --release
+```
+
+* 위 명령어로 빌드하면 최적화 컴파일을 하기 때문에 프로그램 속도가 디버그모드보다 빠르다.
