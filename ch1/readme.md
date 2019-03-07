@@ -58,3 +58,29 @@ Hello, world!
 
 - `cargo`는 `rust`의 빌드 시스템이고 패키지 매니저이다.
 - `cargo`는 코드를 빌드하고 라이브러리를 설치하는데 사용된다.
+
+### `cargo`로 프로젝트 생성하기
+
+```bash
+$ cargo new hello_cargo
+$ cd hello_cargo
+```
+
+* `cargo new <project_name>`으로 새로운 `rust` 프로젝트를 생성할 수 있다.
+* 생성된 프로젝트 안에는 `Cargo.toml`과 `main.rs` 파일이 들어있는 `src` 디렉토리가 포함되어있다.
+
+### `Cargo.toml`
+
+```toml
+[package]
+name = "hello_cargo"
+version = "0.1.0"
+authors = ["Your Name <you@example.com>"]
+edition = "2018"
+
+[dependencies]
+```
+
+* TOML(Tom’s Obvious, Minimal Language) 포맷은 카고의 설정 포맷이다.
+* `[package]` 밑 부분은 패키지를 설정하는 부분이다.
+* `[dependencies]` 밑 부분은 해당 패키지의 종속성 리스트이다.
