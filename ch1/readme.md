@@ -1,4 +1,4 @@
-# Ch. 1 Getting Started
+# Ch 1. Getting Started
 
 > 다음 문서는 맥 기준으로 작성되었습니다.
 

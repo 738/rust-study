@@ -1,4 +1,4 @@
-# Ch. 2 Programming a Guessing Game
+# Ch 2. Programming a Guessing Game
 
 ## 새 프로젝트 생성
 
