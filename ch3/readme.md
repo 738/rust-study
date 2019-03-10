@@ -219,7 +219,7 @@ fn main() {
 }
 ```
 
-### 문자 타입
+#### 문자 타입
 
 * Rust의 `char`는 가장 근본적인 알파벳 타입이다.
 * String이 큰 따옴표를 쓰는 것에 반해 `char` 타입은 작은 따옴표를 쓴다.
@@ -232,9 +232,100 @@ fn main() {
 }
 ```
 
+### 복합 타입
+
+* 복합 타입은 다른 타입의 다양한 값을 하나로 묶을 수 있다. Rust는 튜플과 배열, 두 개의 복합 타입을 가지고 있다.
+
+#### 튜플
+
+```rust
+fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+```
+
+* 변수 `tup`에는 튜플 전체가 bind된다.
+
+```rust
+fn main() {
+    let tup = (500, 6.4, 1);
+
+    let (x, y, z) = tup;
+
+    println!("The value of y is: {}", y);
+}
+```
+
+* 위와 같이 `tup`을 세 개의 분리된 변수인 `x`, `y`, `z`에 *구조해제*하여 할당할 수 있다.
+
+```rust
+fn main() {
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+
+    let six_point_four = x.1;
+
+    let one = x.2;
+}
+```
+
+* `.` 뒤에 색인을 넣어서 튜플의 요소에 접근할 수 있다.
+
+#### 배열
+
+* 튜플과는 다르게 배열의 모든 요소는 타입이 같아야 한다.
+* 고정된 길이를 갖는다.
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
+```
+
+* 벡터 타입처럼 가변적이지 않다. 벡터 타입은 유사 집합체로 표준 라이브러리에서 제공되며, 확장 또는 축소가 가능하다.
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
+```
+
+* 위와 같이 배열의 요소에 접근할 수 있다.
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+    let index = 10;
+
+    let element = a[index];
+
+    println!("The value of element is: {}", element);
+}
+```
+
+```bash
+$ cargo run
+   Compiling arrays v0.1.0 (file:///projects/arrays)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
+     Running `target/debug/arrays`
+thread '<main>' panicked at 'index out of bounds: the len is 5 but the index is
+ 10', src/main.rs:6
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+```
+
+* 컴파일 시에는 아무런 에러도 발생시키지 않았지만 프로그램의 실행 간에 에러가 발생했다.
+* 색인을 사용하여 배열에 접근하려고 하면 Rust는 지정된 색인이 배열 길이보다 작은지 확인하고 색인이 길이보다 길면 *패닉*한다.
+* Rust의 안전 원칙이 동작하는 첫번째 예이다. Rust는 메모리 접근을 허용하고 계속 진행하는 대신 즉시 종료하여 이러한 종류의 오류로부터 사용자를 보호한다.
+
 ## 3.3 How Functions Work
 
 ## 3.4 Comments
+
+* 주석은 다른 프로그래밍 언어들과 비슷하게 `//` 를 사용해서 주석으로 표시한다.
 
 ## 3.5 Control Flow
 
