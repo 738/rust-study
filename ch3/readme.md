@@ -321,7 +321,138 @@ note: Run with `RUST_BACKTRACE=1` for a backtrace.
 * 색인을 사용하여 배열에 접근하려고 하면 Rust는 지정된 색인이 배열 길이보다 작은지 확인하고 색인이 길이보다 길면 *패닉*한다.
 * Rust의 안전 원칙이 동작하는 첫번째 예이다. Rust는 메모리 접근을 허용하고 계속 진행하는 대신 즉시 종료하여 이러한 종류의 오류로부터 사용자를 보호한다.
 
+#### 요약
+
+* Rust에는 크게 Scala, Compound 타입 두 종류의 타입이 있다.
+* Scala 타입에는 정수형, 부동소수점, 불리언, 문자 타입이 있고 Compound 타입에는 튜플, 배열이 있다.
+
 ## 3.3 How Functions Work
+
+```rust
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+* Rust에서는 변수나 함수의 네이밍 규칙으로 *snake case*를 사용한다.
+* Rust는 함수의 위치를 신경쓰지 않는다. `another_function` 함수가 `main` 함수 뒤에 있어도 되고 앞에 있어도 상관없다.
+
+### 함수 매개변수
+
+```rust
+fn main() {
+    another_function(5);
+}
+
+fn another_function(x: i32) {
+    println!("The value of x is: {}", x);
+}
+```
+
+* 각 매개변수마다 타입을 지정해야 한다.
+
+### 구문과 표현식
+
+* `let y = 6;`는 구문이다. 함수 정의도 또 하나의 구문이다.
+
+```rust
+fn main() {
+    let x = (let y = 6);
+}
+```
+
+```bash
+$ cargo run
+   Compiling functions v0.1.0 (file:///projects/functions)
+error: expected expression, found statement (`let`)
+ --> src/main.rs:2:14
+  |
+2 |     let x = (let y = 6);
+  |              ^^^
+  |
+  = note: variable declaration using `let` is a statement
+```
+
+* `let y = 6` 구문은 반환값이 없으므로 x에 바인딩할 값이 없다.
+* Rust 코드의 대부분은 표현식이며 이는 어떤 값을 산출한다. `5+6`은 `11`을 산출하는 표현식이다.
+* 함수와 매크로를 호출하는 것은 표현식이다.
+
+```rust
+fn main() {
+    let x = 5;
+
+    let y = {
+        let x = 3;
+        x + 1
+    };
+
+    println!("The value of y is: {}", y);
+}
+```
+
+* 새로운 범위를 생성하는데 사용하는 블록 `{}`은 표현식이다.
+* 위 예제의 블록에서 `4`를 산출한다. 이 값은 `let` 구문의 일부로 `y`에 바운드된다.
+* 표현식은 종결을 나타내는 세미콜론을 사용하지 않는다. 만약 세미콜론을 표현식 마지막에 추가하면, 이는 구문으로 변경되고 반환값이 아니게 된다.
+
+### 반환값을 갖는 함수
+
+* 반환값의 타입이 `->` 뒤에 명시되어야 한다.
+* 대부분의 함수들은 암묵적으로 마지막 표현식을 반환한다.
+
+```rust
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {}", x);
+}
+```
+
+```rust
+fn main() {
+    let x = plus_one(5);
+
+    println!("The value of x is: {}", x);
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1;
+}
+```
+
+```rust
+error[E0308]: mismatched types
+ --> src/main.rs:7:28
+  |
+7 |   fn plus_one(x: i32) -> i32 {
+  |  ____________________________^
+8 | |     x + 1;
+  | |          - help: consider removing this semicolon
+9 | | }
+  | |_^ expected i32, found ()
+  |
+  = note: expected type `i32`
+             found type `()`
+```
+
+* 위와 같이 `plus_one` 함수의 마지막에 표현식이 아닌 구문으로써 `;`을 붙이게 되면 `mismatched types` 에러가 발생한다.
+* 구문은 값을 산출하지 않고 `()`처럼 빈 튜플로 표현된다.
+
+#### 요약
+
+* 변수와 함수의 네이밍 기본 관습은 `snake_case`이고 함수의 위치는 상관 없다.
+* 매개변수와 반환값에 타입을 지정해야 한다.
+* 구문은 산출되는 값이 없고 표현식은 산출되는 값이 있다. 따라서 표현식 뒤에는 `;`이 붙지 않는다.
+* 새로운 범위를 생성하는데 사용하는 블록 `{}`은 표현식이다.
 
 ## 3.4 Comments
 
