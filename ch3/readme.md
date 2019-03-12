@@ -460,5 +460,102 @@ error[E0308]: mismatched types
 
 ## 3.5 Control Flow
 
+### `if` 표현식
 
+```rust
+fn main() {
+    let number = 6;
 
+    if number % 4 == 0 {
+        println!("number is divisible by 4");
+    } else if number % 3 == 0 {
+        println!("number is divisible by 3");
+    } else if number % 2 == 0 {
+        println!("number is divisible by 2");
+    } else {
+        println!("number is not divisible by 4, 3, or 2");
+    }
+}
+```
+
+* `if` 문안에 조건식은 `bool` 타입이어야 한다.
+* 너무 많은 `else if`의 코드는 이해하기 어려우므로 Rust에서 `match`라는 분기 생성자를 지원한다. (6장에서 다룬다.)
+
+### `let` 구문에서 `if` 사용하기
+
+* `if`가 표현식이기 때문에 `let` 구문의 우측에 사용할 수 있다.
+* 또한 `if`, `else if`, `else` 표현식에서 산출하는 값이 모두 같은 타입이어야 한다.
+
+```rust
+fn main() {
+    let condition = true;
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    println!("The value of number is: {}", number);
+}
+```
+
+### 반복문과 반복
+
+* Rust에서 제공하는 반복문은 크게 세가지다: `loop`, `while`, `for`
+
+#### `loop` 무한반복
+
+* `loop`을 사용해서 무한반복에 빠지게 할 수 있다.
+
+```rust
+fn main() {
+    loop {
+        println!("again!");
+    }
+}
+```
+
+### `while` 조건부반복
+
+```rust
+fn main() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{}!", number);
+
+        number = number - 1;
+    }
+
+    println!("LIFTOFF!!!");
+}
+```
+
+### `for` 콜렉션반복
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("the value is: {}", element);
+    }
+}
+```
+
+```rust
+fn main() {
+    for number in (1..4).rev() {
+        println!("{}!", number);
+    }
+    println!("LIFTOFF!!!");
+}
+```
+
+#### 요약
+
+* `if`문 조건식 안에는 `bool` 타입이어야 한다.
+* `if`문 표현식들 안에는 모두 같은 타입이 있어야 한다.
+* `loop`을 사용하면 쉽게 무한반복에 빠뜨릴 수 있다.
+* `while`을 사용하면 조건부 반복문을 구현할 수 있다.
+* `for`을 사용하면 콜렉션 반복문을 구현할 수 있다.
