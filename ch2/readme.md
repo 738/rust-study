@@ -52,7 +52,7 @@ let mut guess = String::new();
 
 ### `Result` 타입으로 잠재된 실패 다루기
 
-### `println!` 변경자 (placeholder)를 이용한 값 출력
+### `println!` 변경자 (placeholder)를 이용한 값 출력
 
 ## 비밀번호 생성
 
@@ -60,7 +60,7 @@ let mut guess = String::new();
 
 #### 재현 가능한 빌드를 보장하는 `Carogo.lock`
 
-#### 크레이트를 새로운 버전으로 업그레이드하기
+#### 크레이트를 새로운 버전으로 업그레이드하기
 
 ### 임의의 숫자 생성
 
