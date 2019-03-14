@@ -52,15 +52,29 @@ let mut guess = String::new();
 
 ### `Result` 타입으로 잠재된 실패 다루기
 
-### `println!` 변경자 (placeholder)를 이용한 값 출력
+* `io::Result` 인스턴스는 `expect`라는 메소드를 가지고 있다. `io::Result` 인스턴스의 값이 `Err`일 경우 `expect` 메소드는 프로그램의 작동을 멈추게 하고 메시지를 출력하도록 한다.
+
+### `println!` 변경자 (placeholder)를 이용한 값 출력
+
+```rs
+println!("You guessed: {}", guess);
+```
+
+* `{}`는 변경자로써 값이 표시되는 위치를 나타낸다.
 
 ## 비밀번호 생성
 
 ### 크레이트(Crate)를 사용하여 모듈 가져오기
 
-#### 재현 가능한 빌드를 보장하는 `Carogo.lock`
+* `rand` 코드를 사용하기 전에 `Cargo.toml`의 의존 리스트에 `rand` 크레이트를 추가한다.
+* Cargo는 버전을 명시하는 표준에 해당하는 [Semantic Versioning(semver)](https://semver.org/)을 이용한다.
+* Cargo는 [Crates.io](https://crates.io/) 데이터의 복사본인 레지스트리(registry)에서 모든 것들을 가져온다. Crates.io는 Rust 생태계의 개발자들이 다른 사람들도 이용할 수 있도록 Rust 오픈소스를 공개하는 곳이다.
 
-#### 크레이트를 새로운 버전으로 업그레이드하기
+```toml
+[dependencies]
+
+rand = "0.3.14"
+```
 
 ### 임의의 숫자 생성
 
@@ -73,5 +87,3 @@ let mut guess = String::new();
 ### 잘못된 입력값 처리하기
 
 #### 요약
-
-
